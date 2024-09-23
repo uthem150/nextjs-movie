@@ -5,7 +5,13 @@
 // http://localhost:3000/movies/111?region=kr&page=2
 // -> { params: { id: '111' }, searchParams: { region: 'kr', page: '2' } }
 
-export default function MovieDetail(props) {
-  console.log(props);
-  return <h1>Movie</h1>;
+// params: { id }는 props의 params 객체에서 id 속성을 추출하는 방식
+export default function MovieDetail({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  // http://localhost:3000/movies/111
+  // Movie 111이 화면에 나오게 됨
+  return <h1>Movie {id}</h1>;
 }
