@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "About us | Next Movies",
+  title: "About us",
 };
 
 export default function AboutUs() {
