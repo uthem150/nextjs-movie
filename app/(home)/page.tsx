@@ -1,8 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
+export const metadata = {
+  title: "Home",
+};
 
 // client component에서는 metadata를 export할 수 없음.
-
 
 // React는 useState, setMovies, loading상태 관리 등을 모두 해줘야 함
 // nextJS는 서버 컴포넌트에서, 할 수 있으므로 -> useEffect, useState를 쓰지 않아도 됨 + 로딩상태 구현 안해도 됨
@@ -12,22 +12,17 @@ import { useEffect, useState } from "react";
 // NextJS와 서버컴포넌트를 이용하면 React App <-----> API <-----> DB 흐름이 아니라,
 // API가 필요가 없게 됨.
 
-export default function Page() {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
-  const getMovies = async () => {
-    const response = await fetch(
-      "https://nomad-movies.nomadcoders.workers.dev/movies"
-    );
-    const json = await response.json();
-    setMovies(json);
-    setIsLoading(false);
-  };
+async function getMovies() {
+  // const response = await fetch(URL);
+  // const json = await response.json();
+  // return json;
+  return fetch(URL).then((response) => response.json());
+}
 
-  useEffect(() => {
-    getMovies();
-  }, []);
-
-  return <div>{isLoading ? "Loading" : JSON.stringify(movies)} </div>;
+// await을 사용하기 위해 async로 변경
+export default async function HomePage() {
+  const movies = await getMovies();
+  return <div>{JSON.stringify(movies)} </div>;
 }
