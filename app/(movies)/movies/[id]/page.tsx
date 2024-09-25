@@ -29,8 +29,8 @@ export default async function MovieDetail({
 }) {
   // http://localhost:3000/movies/111
   // Movie 111이 화면에 나오게 됨
-  const movie = await getMovie(id);
-  const videos = await getVideos(id);
-  
+
+  const [movie, videos] = await Promise.all([getMovie(id), getVideos(id)]);
+
   return <h1>{movie.title}</h1>;
 }
