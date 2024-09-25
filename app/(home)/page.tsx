@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Home",
 };
@@ -12,22 +14,24 @@ export const metadata = {
 // NextJS와 서버컴포넌트를 이용하면 React App <-----> API <-----> DB 흐름이 아니라,
 // API가 필요가 없게 됨.
 
-const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
+export const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getMovies() {
-  // 이렇게 fetch해오는 단점은,
-  // 백엔드에서 fetch되므로, 사용자를 위한 UI가 없다는 점임
-  // fetch되기 전에는 return부분이 render되지 않음.
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // const response = await fetch(URL);
-  // const json = await response.json();
-  // return json;
-  return fetch(URL).then((response) => response.json());
+  return fetch(API_URL).then((response) => response.json());
 }
 
 // await을 사용하기 위해 async로 변경
 export default async function HomePage() {
   const movies = await getMovies();
-  return <div>{JSON.stringify(movies)} </div>;
+  return (
+    <div>
+      {movies.map((movie) => (
+        <li key={movie.id}>
+          <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
+        </li>
+      ))}
+    </div>
+  );
 }
