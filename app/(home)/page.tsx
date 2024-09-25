@@ -15,6 +15,11 @@ export const metadata = {
 const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getMovies() {
+  // 이렇게 fetch해오는 단점은,
+  // 백엔드에서 fetch되므로, 사용자를 위한 UI가 없다는 점임
+  // fetch되기 전에는 return부분이 render되지 않음.
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
   // const response = await fetch(URL);
   // const json = await response.json();
   // return json;
