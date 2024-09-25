@@ -4,7 +4,16 @@
 import { API_URL } from "../../../(home)/page";
 
 async function getMovie(id: string) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const response = await fetch(`${API_URL}/${id}`);
+  return response.json();
+}
+
+async function getVideos(id: string) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const response = await fetch(`${API_URL}/${id}/videos`);
   return response.json();
 }
 
@@ -18,8 +27,10 @@ export default async function MovieDetail({
 }: {
   params: { id: string };
 }) {
-  const movie = await getMovie(id);
   // http://localhost:3000/movies/111
   // Movie 111이 화면에 나오게 됨
+  const movie = await getMovie(id);
+  const videos = await getVideos(id);
+  
   return <h1>{movie.title}</h1>;
 }
