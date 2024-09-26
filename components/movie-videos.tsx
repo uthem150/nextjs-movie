@@ -3,8 +3,10 @@ import { API_URL } from "../app/(home)/page";
 async function getVideos(id: string) {
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  const response = await fetch(`${API_URL}/${id}/videos`);
-  return response.json();
+  // 만약 API를 받아오는데 실패한다면?
+  throw new Error("something broke...");
+  // const response = await fetch(`${API_URL}/${id}/videos`);
+  // return response.json();
 }
 
 export default async function MovieVideos({ id }: { id: string }) {
