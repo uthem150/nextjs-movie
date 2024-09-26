@@ -1,21 +1,9 @@
 // [] <- 대괄호 폴더를 만들면, 동적 라우팅을 할 수 있음.
 // movies/1212
 
-import { API_URL } from "../../../(home)/page";
-
-async function getMovie(id: string) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  const response = await fetch(`${API_URL}/${id}`);
-  return response.json();
-}
-
-async function getVideos(id: string) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  const response = await fetch(`${API_URL}/${id}/videos`);
-  return response.json();
-}
+import { Suspense } from "react";
+import MovieInfo from "../../../../components/movie-info";
+import MovieVideos from "../../../../components/movie-videos";
 
 // props를 안에 넣으면, 두 종류의 props를 얻을 수 있음
 // http://localhost:3000/movies/111?region=kr&page=2
@@ -30,7 +18,17 @@ export default async function MovieDetail({
   // http://localhost:3000/movies/111
   // Movie 111이 화면에 나오게 됨
 
-  const [movie, videos] = await Promise.all([getMovie(id), getVideos(id)]);
-
-  return <h1>{movie.title}</h1>;
+  return (
+    <div>
+      <h3>Movie Detail Page</h3>
+      {/* suspense가 데이터를 fetch하기 위해 안의 component를 await */}
+      {/* fetch중에는 fallback을 render */}
+      <Suspense fallback={<h1>Loading movie info</h1>}>
+        <MovieInfo id={id} />
+      </Suspense>
+      <Suspense fallback={<h1>Loading movie videos</h1>}>
+        <MovieVideos id={id} />
+      </Suspense>
+    </div>
+  );
 }
