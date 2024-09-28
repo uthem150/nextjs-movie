@@ -101,6 +101,7 @@ section {
   display: block;
 }
 body {
+  padding-top: 150px;
   line-height: 1;
 }
 ol,
@@ -136,4 +137,3 @@ a {
 a:hover {
   text-decoration: underline;
 }
-	
