@@ -18,7 +18,7 @@ export default async function MovieInfo({ id }: { id: string }) {
       />
       <div className={styles.info}>
         <h1 className={styles.title}>{movie.title}</h1>
-        <h3>⭐{movie.vote_average}</h3>
+        <h3>⭐{movie.vote_average.toFixed(2)}</h3>
         <p>{movie.overview}</p>
         {/* 분리된 탭에서 열리도록 하기 위해 target속성 추가 */}
         <a href={movie.homepage} target={"_blank"}>
