@@ -20,16 +20,13 @@ export default async function MovieDetail({
 
   return (
     <div>
-      <h3>Movie Detail Page</h3>
-      {/* suspense가 데이터를 fetch하기 위해 안의 component를 await */}
-      {/* fetch중에는 fallback을 render */}
       <Suspense fallback={<h1>Loading movie info</h1>}>
         <MovieInfo id={id} />
       </Suspense>
-      <h4>Videos</h4>
-      <Suspense fallback={<h1>Loading movie videos</h1>}>
+
+      {/* <Suspense fallback={<h1>Loading movie videos</h1>}>
         <MovieVideos id={id} />
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }
