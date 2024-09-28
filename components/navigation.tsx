@@ -3,13 +3,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import styles from "../styles/navigation.module.css"; // 마치 JS파일처럼 import
 
 export default function Navigation() {
   // 유저가 현재 머물고 있는 훅 url알려줌
   const path = usePathname();
 
   return (
-    <nav>
+    // 이렇게 JS처럼 가져오면, class의 충돌을 피할 수 있게 됨
+    <nav className={styles.nav}>
       <ul>
         <li>
           <Link href="/">Home</Link> {path === "/" ? "🔥" : ""}

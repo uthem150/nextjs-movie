@@ -1,0 +1,10 @@
+/* module.css 로 끝나야 함 */
+
+.nav {
+  background-color: red;
+  padding: 50px 100px;
+}
+
+.nav ul {
+  display: flex;
+}
