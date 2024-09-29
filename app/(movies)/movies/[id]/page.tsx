@@ -23,9 +23,6 @@ export async function generateMetadata({ params: { id } }: IParams) {
 
 // params: { id }는 props의 params 객체에서 id 속성을 추출하는 방식
 export default async function MovieDetailPage({ params: { id } }: IParams) {
-  // http://localhost:3000/movies/111
-  // Movie 111이 화면에 나오게 됨
-
   return (
     <div>
       <Suspense fallback={<h1>Loading movie info</h1>}>
